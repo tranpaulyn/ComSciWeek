@@ -1,31 +1,20 @@
 class Pizza {
 
-    constructor() {
+    constructor(size, crust) {
+        this.size = size;
         this.toppings = ['cheese'];
-        this.crust = [];
+        this.crust = crust;
     }
 
     addTopping(topping) {
         this.toppings.push(topping);
     }
-
-    customCrust(crust) {
-        this.crust.push(crust);
-    }
-
     
 }
 
-let pizza1 = new Pizza();
-console.log(pizza1.toppings);
-pizza1.addTopping('mushrooms');
-pizza1.addTopping('peppers');
-pizza1.customCrust('thin');
-console.log(pizza1);
+let pizza = new Pizza ('large', 'thin');
+pizza.addTopping('lasagna');
 
-let pizza2 = new Pizza ();
-console.log(pizza2.toppings);
-pizza2.addTopping('more cheese');
-pizza2.customCrust('thick');
-pizza2.customCrust('gluten free');
+let pizza2 = new Pizza ('extra small', 'thicc');
+pizza2.addTopping('dairy free cheese');
 console.log(pizza2);
