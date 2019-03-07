@@ -32,13 +32,34 @@ class Employee {
       hasSameBoss(employee) {
         return this.boss === employee.boss;
       }
+
+    employeesThatMakeOver(amount) {
+        let employees = [];
+
+        if (this.salary > amount) {
+            employees.push(this);
+        }
+
+        for (const subordinate of this.subordinates) {
+            const subordinatesThatMakeOver = subordinate.employeesThatMakeOver(amount);
+            employees = employees.concat(subordinatesThatMakeOver);
+        }
+
+        return employees;
+    }
+
+    get totalEmployees() {
+        let totalEmployees = 0;
+        let currentEmployee = this;
+    }
+
   }
 
-const ada = new Employee("Ada", "CEO", 3000000.00);
-const craig    = new Employee("Craig", "VP Software", 1000000);
-const arvinder = new Employee("Arvinder", "Chief Design Officer", 1000000);
-const angela   = new Employee("Angela", "VP Retail", 1000000);
-const phil     = new Employee("Phil", "VP Marketing", 1000000);
+const ada = new Employee("Ada", "CEO", 418401.00);
+const craig    = new Employee("Craig", "VP Software", 100000);
+const arvinder = new Employee("Arvinder", "Chief Design Officer", 100000);
+const angela   = new Employee("Angela", "VP Retail", 100000);
+const phil     = new Employee("Phil", "VP Marketing", 100000);
 
 ada.addSubordinate(craig);
 ada.addSubordinate(arvinder);
@@ -66,3 +87,7 @@ angela.addSubordinate(karla);
 console.log(karla.numberOfSubordinates);
 console.log(karla.boss);
 console.log(karla.numberOfPeopleToCEO);
+
+let wealthyEmployees = ada.employeesThatMakeOver(418401);
+
+console.log(wealthyEmployees);
