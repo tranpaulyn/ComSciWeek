@@ -50,7 +50,17 @@ class Employee {
 
     get totalEmployees() {
         let totalEmployees = 0;
-        let currentEmployee = this;
+
+        let employees = [];
+
+        if (this.subordinate > 1) {
+            employees.push(this)
+        }
+        for (const subordinate of this.subordinates) {
+            employees += subordinate.totalEmployees();
+        }
+
+        return totalEmployees;
     }
 
   }
@@ -84,10 +94,10 @@ const karla = new Employee('Karla', 'employee', 10);
 
 angela.addSubordinate(karla);
 
-console.log(karla.numberOfSubordinates);
-console.log(karla.boss);
-console.log(karla.numberOfPeopleToCEO);
+// console.log(karla.numberOfSubordinates);
+// console.log(karla.boss);
+// console.log(karla.numberOfPeopleToCEO);
 
 let wealthyEmployees = ada.employeesThatMakeOver(418401);
 
-console.log(wealthyEmployees);
+console.log(ada.totalEmployees);
